@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import AsyncAwait from 'react-async-await';
 
 export default class App extends Component {

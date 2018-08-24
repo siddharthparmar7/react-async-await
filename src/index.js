@@ -16,7 +16,8 @@ export default class AsyncAwait extends Component {
   }
 
   componentDidMount() {
-    this.props.url && this.getData(this.props.url)
+    const { url } = this.props
+    url && this.getData(url)
   }
 
   getPromise = url => {
