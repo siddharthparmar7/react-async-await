@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 
 export default class AsyncAwait extends Component {
   static propTypes = {
-    url: PropTypes.string.isRequired
+    url: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ])
   }
 
   constructor(props) {
@@ -17,7 +20,9 @@ export default class AsyncAwait extends Component {
 
   componentDidMount() {
     const { url } = this.props
-    url && this.getData(url)
+    url && typeof url === 'object' && url.length > 1
+      ? this.getData(url)
+      : this.getData([url])
   }
 
   getPromise = url => {
@@ -35,16 +40,16 @@ export default class AsyncAwait extends Component {
     }
   }
 
-  getData(url) {
+  async getData(urls) {
+    let allPromises = []
     this.setState({ loading: true })
-    this.getPromise(url)
-      .then(res => {
-        this.setState({ data: res, error: null })
-      })
-      .then(() => this.setState({ loading: false }))
-      .catch(error => {
-        this.setState({ error })
-      })
+    try {
+      urls.map(url => allPromises.push(this.getPromise(url)))
+      const data = await Promise.all(allPromises)
+      this.setState({ loading: false, data, error: null })
+    } catch (error) {
+      this.setState({ error })
+    }
   }
 
   render() {
