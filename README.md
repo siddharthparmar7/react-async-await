@@ -12,24 +12,43 @@ npm install --save react-async-await
 
 ## Usage
 
-```jsx
-import React, { Component } from 'react';
+With Single Url
 
-import AsyncAwait from 'react-async-await';
+```jsx
+import React, { Component } from 'react'
+
+import AsyncAwait from 'react-async-await'
 
 class Example extends Component {
   render() {
     return (
       <AsyncAwait url="https://jsonplaceholder.typicode.com/posts">
         {({ loading, error, data }) => {
-          if (error) return <h2>{error}</h2>;
-          if (loading) return <h2>Loading...</h2>;
-          if (data) console.log(data);
+          if (error) return <h2>{error}</h2>
+          if (loading) return <h2>Loading...</h2>
+          if (data) console.log(data)
         }}
       </AsyncAwait>
-    );
+    )
   }
 }
+```
+
+With Multiple Urls
+
+```jsx
+<AsyncAwait
+  url={[
+    'https://jsonplaceholder.typicode.com/posts',
+    'https://jsonplaceholder.typicode.com/users'
+  ]}
+>
+  {({ loading, error, data }) => {
+    if (error) return <h2>{error}</h2>
+    if (loading) return <h2>Loading...</h2>
+    if (data) console.log(data)
+  }}
+</AsyncAwait>
 ```
 
 ## Note
