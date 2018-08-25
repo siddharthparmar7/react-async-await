@@ -21,18 +21,18 @@ export default class AsyncAwait extends Component {
   }
 
   getPromise = url => {
-    return new Promise((resolve, reject) => {
-      if (url) {
-        fetch(url)
-          .then(res => {
-            if (res.status === 404) reject('Error: ' + res.status)
-            else resolve(res.json())
-          })
-          .catch(error => reject('Error:' + error))
-      } else {
-        reject('Error:', new Error())
-      }
-    })
+    if (url) {
+      return fetch(url)
+        .then(res => {
+          if (res.status === 404) throw 'Error: ' + res.status
+          else return res.json()
+        })
+        .catch(error => {
+          throw 'Error:' + error
+        })
+    } else {
+      throw ('Error:', new Error())
+    }
   }
 
   getData(url) {
