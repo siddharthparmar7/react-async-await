@@ -12,12 +12,12 @@ npm install --save react-async-await
 
 ## Usage
 
-With Single Url
+**With Single Url**
 
 ```jsx
 import React, { Component } from 'react'
 
-import AsyncAwait from 'react-async-await'
+import { AsyncAwait } from 'react-async-await'
 
 class Example extends Component {
   render() {
@@ -26,7 +26,7 @@ class Example extends Component {
         {({ loading, error, data }) => {
           if (error) return <h2>{error}</h2>
           if (loading) return <h2>Loading...</h2>
-          if (data) console.log(data)
+          if (data) return <MyComponent data={data} />
         }}
       </AsyncAwait>
     )
@@ -34,7 +34,7 @@ class Example extends Component {
 }
 ```
 
-With Multiple Urls
+**With Multiple Urls**
 
 ```jsx
 <AsyncAwait
@@ -46,9 +46,47 @@ With Multiple Urls
   {({ loading, error, data }) => {
     if (error) return <h2>{error}</h2>
     if (loading) return <h2>Loading...</h2>
-    if (data) console.log(data)
+    if (data) return <MyComponent data={data} />
   }}
 </AsyncAwait>
+```
+
+**With BaseUrl**
+
+```jsx
+// App.js
+import React, { Component } from 'react'
+import AsyncAwaitProvider from 'react-async-await'
+import AnotherComponent from './AnotherComponent'
+
+export default class App extends Component {
+  render() {
+    return (
+      <AsyncAwaitProvider baseUrl="https://jsonplaceholder.typicode.com">
+        <AnotherComponent />
+      </AsyncAwaitProvider>
+    )
+  }
+}
+
+// AnotherComponent.js
+import React, { Component } from 'react'
+import { AsyncAwait } from 'react-async-await'
+
+class AnotherComponent extends Component {
+  render() {
+    return (
+      <AsyncAwait path={['/posts', '/users']}>
+        // or path="/posts" or path={["/posts]}
+        {({ loading, error, data }) => {
+          if (error) return <h2>{error}</h2>
+          if (loading) return <h2>Loading...</h2>
+          if (data) console.log(data)
+        }}
+      </AsyncAwait>
+    )
+  }
+}
 ```
 
 ## Note
