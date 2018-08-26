@@ -16,7 +16,7 @@ npm install --save react-async-await
 
 ```jsx
 import React, { Component } from 'react'
-
+import MyComponent from './MyComponent'
 import { AsyncAwait } from 'react-async-await'
 
 class Example extends Component {
@@ -71,23 +71,25 @@ export default class App extends Component {
 
 // AnotherComponent.js
 import React, { Component } from 'react'
+import MyComponent from './MyComponent'
 import { AsyncAwait } from 'react-async-await'
 
 class AnotherComponent extends Component {
   render() {
     return (
       <AsyncAwait path={['/posts', '/users']}>
-        // or path="/posts" or path={["/posts]}
         {({ loading, error, data }) => {
           if (error) return <h2>{error}</h2>
           if (loading) return <h2>Loading...</h2>
-          if (data) console.log(data)
+          if (data) return <MyComponent data={data} />
         }}
       </AsyncAwait>
     )
   }
 }
 ```
+
+You can also do path="/posts" or path={["/posts]}
 
 ## Note
 
