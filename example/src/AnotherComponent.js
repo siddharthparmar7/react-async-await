@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { AsyncAwait } from 'react-async-await'
-import PropTypes from 'prop-types'
 
 class AnotherComponent extends Component {
-  static propTypes = {}
   render() {
     return (
       <AsyncAwait path={['/posts', '/users']}>

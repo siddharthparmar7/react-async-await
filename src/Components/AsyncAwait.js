@@ -7,7 +7,8 @@ class AsyncAwait extends Component {
     path: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string)
-    ])
+    ]),
+    baseUrl: PropTypes.string
   }
 
   constructor(props) {
@@ -22,9 +23,7 @@ class AsyncAwait extends Component {
 
   componentDidMount() {
     const { path } = this.props
-    // todo check if the path is full URL
-    // if yes -> do it else -> don't
-    if (this.state.baseUrl !== null) {
+    if (this.state.baseUrl === null && path) {
       path && typeof path === 'object' && path.length > 1
         ? this.getData(path)
         : this.getData([path])
