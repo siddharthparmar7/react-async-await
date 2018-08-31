@@ -4,6 +4,13 @@
   "description": "A React component to help with async await",
   "author": "siddharthparmar7",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "react-native",
+    "async-await",
+    "promises",
+    "fetch"
+  ],
   "repository": "siddharthparmar7/react-async-await",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
