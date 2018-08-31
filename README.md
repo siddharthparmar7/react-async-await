@@ -1,6 +1,6 @@
-# react-async-await
+# async-react
 
-> A React component library to help with async await
+> A React component library to help with async await. Can be used with ReactNative too!
 
 [![NPM](https://img.shields.io/npm/v/react-async-await.svg)](https://www.npmjs.com/package/react-async-await) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -17,7 +17,7 @@ npm install --save async-react
 ```jsx
 import React, { Component } from 'react';
 import MyComponent from './MyComponent';
-import { AsyncAwait } from 'react-async-await';
+import { AsyncAwait } from 'async-react';
 
 class Example extends Component {
   render() {
@@ -56,7 +56,7 @@ class Example extends Component {
 ```jsx
 // App.js
 import React, { Component } from 'react';
-import AsyncAwaitProvider from 'react-async-await';
+import AsyncAwaitProvider from 'async-react';
 import AnotherComponent from './AnotherComponent';
 
 export default class App extends Component {
@@ -72,7 +72,7 @@ export default class App extends Component {
 // AnotherComponent.js
 import React, { Component } from 'react';
 import MyComponent from './MyComponent';
-import { AsyncAwait } from 'react-async-await';
+import { AsyncAwait } from 'async-react';
 
 class AnotherComponent extends Component {
   render() {
