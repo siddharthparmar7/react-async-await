@@ -1,6 +1,6 @@
 {
   "name": "async-react",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A React component to help with async await",
   "author": "siddharthparmar7",
   "license": "MIT",
