@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncAwait } from 'react-async-await';
+import { AsyncAwait } from 'async-react';
 
 class AnotherComponent extends Component {
   render() {

@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save react-async-await
+npm install --save async-react
 ```
 
 ## Usage
