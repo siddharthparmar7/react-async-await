@@ -1,6 +1,6 @@
 # async-react
 
-> A React component library to help with async await. Can be used with ReactNative too!
+> A React component library to help with async data fetching. Can be used with ReactNative too!
 
 [![NPM](https://img.shields.io/npm/v/react-async-await.svg)](https://www.npmjs.com/package/react-async-await) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
