@@ -93,4 +93,4 @@ You can also do path="/posts" or path={["/posts"]}
 
 ## License
 
-MIT © [siddharthparmar7](https://github.com/siddharthparmar7)
+MIT 
