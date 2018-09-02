@@ -79,7 +79,8 @@ class AsyncAwait extends Component {
 
 export default props => (
   <AsyncAwaitContext.Consumer>
-    {({ baseUrl }) => {
+    {values => {
+      const baseUrl = values ? values.baseUrl : null
       return <AsyncAwait {...props} baseUrl={baseUrl} />
     }}
   </AsyncAwaitContext.Consumer>

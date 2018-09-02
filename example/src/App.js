@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import AsyncAwaitProvider from 'async-react';
-import AnotherComponent from './AnotherComponent';
+import React, { Component } from 'react'
+import AsyncAwaitProvider from 'async-react'
+import AnotherComponent from './AnotherComponent'
 
 export default class App extends Component {
   render() {
@@ -8,6 +8,6 @@ export default class App extends Component {
       <AsyncAwaitProvider baseUrl="https://jsonplaceholder.typicode.com">
         <AnotherComponent />
       </AsyncAwaitProvider>
-    );
+    )
   }
 }

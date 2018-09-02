@@ -2,7 +2,7 @@
 
 > A React component library to help with async await. Can be used with ReactNative too!
 
-[![NPM](https://img.shields.io/npm/v/react-async-await.svg)](https://www.npmjs.com/package/react-async-await) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/async-react.svg)](https://www.npmjs.com/package/async-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
@@ -15,21 +15,21 @@ npm install --save async-react
 **With Single Url**
 
 ```jsx
-import React, { Component } from 'react';
-import MyComponent from './MyComponent';
-import { AsyncAwait } from 'async-react';
+import React, { Component } from 'react'
+import MyComponent from './MyComponent'
+import { AsyncAwait } from 'async-react'
 
 class Example extends Component {
   render() {
     return (
       <AsyncAwait url="https://jsonplaceholder.typicode.com/posts">
         {({ loading, error, data }) => {
-          if (error) return <h2>{error}</h2>;
-          if (loading) return <h2>Loading...</h2>;
-          if (data) return <MyComponent data={data} />;
+          if (error) return <h2>{error}</h2>
+          if (loading) return <h2>Loading...</h2>
+          if (data) return <MyComponent data={data} />
         }}
       </AsyncAwait>
-    );
+    )
   }
 }
 ```
@@ -44,9 +44,9 @@ class Example extends Component {
   ]}
 >
   {({ loading, error, data }) => {
-    if (error) return <h2>{error}</h2>;
-    if (loading) return <h2>Loading...</h2>;
-    if (data) return <MyComponent posts={data[0]} users={data[1]} />;
+    if (error) return <h2>{error}</h2>
+    if (loading) return <h2>Loading...</h2>
+    if (data) return <MyComponent posts={data[0]} users={data[1]} />
   }}
 </AsyncAwait>
 ```
@@ -55,9 +55,9 @@ class Example extends Component {
 
 ```jsx
 // App.js
-import React, { Component } from 'react';
-import AsyncAwaitProvider from 'async-react';
-import AnotherComponent from './AnotherComponent';
+import React, { Component } from 'react'
+import AsyncAwaitProvider from 'async-react'
+import AnotherComponent from './AnotherComponent'
 
 export default class App extends Component {
   render() {
@@ -65,26 +65,26 @@ export default class App extends Component {
       <AsyncAwaitProvider baseUrl="https://jsonplaceholder.typicode.com">
         <AnotherComponent />
       </AsyncAwaitProvider>
-    );
+    )
   }
 }
 
 // AnotherComponent.js
-import React, { Component } from 'react';
-import MyComponent from './MyComponent';
-import { AsyncAwait } from 'async-react';
+import React, { Component } from 'react'
+import MyComponent from './MyComponent'
+import { AsyncAwait } from 'async-react'
 
 class AnotherComponent extends Component {
   render() {
     return (
       <AsyncAwait path={['/posts', '/users']}>
         {({ loading, error, data }) => {
-          if (error) return <h2>{error}</h2>;
-          if (loading) return <h2>Loading...</h2>;
-          if (data) return <MyComponent posts={data[0]} users={data[1]} />;
+          if (error) return <h2>{error}</h2>
+          if (loading) return <h2>Loading...</h2>
+          if (data) return <MyComponent posts={data[0]} users={data[1]} />
         }}
       </AsyncAwait>
-    );
+    )
   }
 }
 ```
