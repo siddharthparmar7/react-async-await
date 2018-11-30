@@ -8,7 +8,9 @@ class AsyncAwait extends Component {
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string)
     ]),
-    baseUrl: PropTypes.string
+    baseUrl: PropTypes.string,
+    headerOptions: PropTypes.object,
+    children: PropTypes.func
   }
 
   constructor(props) {
@@ -17,16 +19,18 @@ class AsyncAwait extends Component {
       baseUrl: null,
       loading: false,
       error: null,
-      data: null
+      data: null,
+      headerOptions: {}
     }
   }
 
   componentDidMount() {
-    const { path } = this.props
+    const { path, headerOptions, baseUrl } = this.props
+    baseUrl !== null && this.setState({ baseUrl })
     if (this.state.baseUrl === null && path) {
       path && typeof path === 'object' && path.length > 1
-        ? this.getData(path)
-        : this.getData([path])
+        ? this.getData(path, headerOptions)
+        : this.getData([path], headerOptions)
     }
   }
 
@@ -35,39 +39,47 @@ class AsyncAwait extends Component {
       this.props.baseUrl !== null &&
       this.props.baseUrl !== prevState.baseUrl
     ) {
-      this.setState({ baseUrl: this.props.baseUrl })
-      const { path } = this.props
+      this.setState({
+        baseUrl: this.props.baseUrl,
+        headerOptions: this.props.headerOptions
+      })
+      const { path, headerOptions } = this.props
       const { baseUrl } = this.state
       baseUrl !== null && path && typeof path === 'object' && path.length > 1
-        ? this.getData(path.map(p => baseUrl + p))
-        : this.getData([baseUrl + path])
+        ? this.getData(path.map(p => baseUrl + p), headerOptions)
+        : this.getData([baseUrl + path], headerOptions)
     }
   }
 
-  getPromise = path => {
+  getPromise = (path, headerOptions) => {
     if (path) {
-      return fetch(path)
+      return fetch(path, headerOptions)
         .then(res => {
-          if (res.status === 404) throw 'Error: ' + res.status
+          if (res.status === 404 || res.ok === false)
+            throw new Error(res.status + ' ' + res.statusText)
           else return res.json()
         })
         .catch(error => {
-          throw 'Error:' + error
+          throw new Error(error)
         })
     } else {
       throw ('Error:', new Error())
     }
   }
 
-  async getData(paths) {
-    let allPromises = []
-    this.setState({ loading: true })
-    try {
-      paths.map(path => allPromises.push(this.getPromise(path)))
-      const data = await Promise.all(allPromises)
-      this.setState({ loading: false, data, error: null })
-    } catch (error) {
-      this.setState({ error })
+  async getData(paths, headerOptions) {
+    const allPromises = []
+    if (this.state.baseUrl !== null) {
+      this.setState({ loading: true })
+      try {
+        paths.map(path =>
+          allPromises.push(this.getPromise(path, headerOptions))
+        )
+        const data = await Promise.all(allPromises)
+        this.setState({ loading: false, data, error: null })
+      } catch (error) {
+        this.setState({ error })
+      }
     }
   }
 
@@ -80,8 +92,17 @@ class AsyncAwait extends Component {
 export default props => (
   <AsyncAwaitContext.Consumer>
     {values => {
-      const baseUrl = values ? values.baseUrl : null
-      return <AsyncAwait {...props} baseUrl={baseUrl} />
+      const baseUrl = values ? values.baseUrl : ''
+      const headerOptions = values
+        ? { ...values.headerOptions, ...props.headerOptions }
+        : props.headerOptions
+      return (
+        <AsyncAwait
+          {...props}
+          baseUrl={baseUrl}
+          headerOptions={headerOptions}
+        />
+      )
     }}
   </AsyncAwaitContext.Consumer>
 )

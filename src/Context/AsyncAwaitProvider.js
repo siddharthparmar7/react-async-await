@@ -1,23 +1,27 @@
-import React, { Component, createContext, Fragment } from 'react'
+import React, { Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
 export const AsyncAwaitContext = createContext()
 
 export default class AsyncAwaitProvider extends Component {
   static propTypes = {
-    baseUrl: PropTypes.string
+    baseUrl: PropTypes.string,
+    headerOptions: PropTypes.object,
+    children: PropTypes.node
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      baseUrl: null
+      baseUrl: null,
+      headerOptions: {}
     }
   }
 
   componentDidMount() {
-    const { baseUrl } = this.props
+    const { baseUrl, headerOptions } = this.props
     baseUrl && this.setState({ baseUrl })
+    headerOptions !== undefined && this.setState({ headerOptions })
   }
 
   changeBaseUrl(newUrl) {
