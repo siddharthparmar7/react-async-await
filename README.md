@@ -12,7 +12,7 @@
 npm install --save async-react
 ```
 
-## Usage
+## Usage:
 
 **With Single Url**
 
@@ -93,7 +93,7 @@ class AnotherComponent extends Component {
 
 You can also do path="/posts" or path={["/posts"]}
 
-## Advanced Use Case
+## Advanced Use Cases:
 
 **With BaseURL**
 
@@ -173,6 +173,9 @@ class AnotherComponent extends Component {
   }
 }
 ```
+
+## Author:
+[Sid Parmar](https://www.linkedin.com/in/siddharth-parmar-a901a075/)
 
 ## License
 
