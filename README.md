@@ -142,7 +142,8 @@ class AnotherComponent extends Component {
 
 You can also do path={["/auth/login"]}
 
-**with single URL**
+**without BaseURL**
+just use the `path` prop (provide full URL) with `AsyncAwait` component
 
 ```jsx
 class AnotherComponent extends Component {
